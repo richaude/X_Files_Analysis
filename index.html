@@ -1,0 +1,305 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- jquery -->
+</head>
+
+<body>
+  <h1> X Files Analysis</h1>
+  <p>An attempt for language specific analysis of a TV series over time.</p>
+
+<div id="myDiv" style="width:100%;height:500;"></div>
+
+  <script>
+    <!-- JAVASCRIPT CODE GOES HERE -->
+    Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv', function(err, rows){
+function unpack(rows, key) {
+  return rows.map(function(row) { return row[key]; });
+}
+
+const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
+  
+<!-- Mulder: high, Scully: low. Reihen mit Floatwerten. Je ein Graph pro Maßeinheit. "Date" sind die Staffeln-->
+var button_layer_2_height = 1.2
+var high = unpack(rows, 'AAPL.High').map(x => parseFloat(x))
+var low = unpack(rows, 'AAPL.Low').map(x => parseFloat(x))
+var date = unpack(rows, 'Date')
+
+<!-- Durchschnitt (wenn gewollt) anders berechnen???
+var high_ave = arrAvg(high)
+var high_max = Math.max(...high)
+var low_ave = arrAvg(low)
+var low_min = Math.min(...low)
+
+var data = [{
+    x: date, 
+    y: high,
+    mode: 'lines',
+    name: 'Mulder',
+    marker: {color: '#33CFA5'}
+  },
+  {
+    x: date, 
+    y: date.map(a => high_ave),
+    mode: 'lines',
+    name: 'Scully Average',
+    line: {color: '#33CFA5', dash: 'dash'},
+    visible: false
+  },
+  {
+    x: date, 
+    y: low,
+    name: 'Scully',
+    mode: 'lines',
+    marker: {color: '#F06A6A'}
+  },
+  {
+    x: date, 
+    y: date.map(a => low_ave),
+    mode: 'lines',
+    name: 'Mulder Average',
+    visible: false,
+    line: {color: '#F06A6A', dash: 'dash'}
+  },
+  
+]
+
+var high_annotations = [
+    {
+      text: 'Mulder Average:<br>' + high_ave.toFixed(2), 
+      x: '2016-03-01', 
+      y: high_ave, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },
+    {
+      text: 'Mulder Max:<br>' + high_max.toFixed(2), 
+      x: date[high.indexOf(high_max)], 
+      y: high_max, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },  
+]
+
+var low_annotations = [{
+      text: 'Scully Average:<br>' + low_ave.toFixed(2), 
+      x: '2015-05-01', 
+      y: low_ave, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    },
+    {
+      text: 'Scully Min:<br>' + low_min.toFixed(2), 
+      x: date[low.indexOf(low_min)], 
+      y: low_min, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    }
+ ]
+
+var updatemenus=[
+    {
+        buttons: [   
+            {
+                args: [{'visible': [true, true, false, false]},
+                       {'title': 'Entropy Mulder',
+                        'annotations': high_annotations}],
+                label: 'Mulder',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [false, false, true, true,]},
+                       {'title': 'Entropy Scully',
+                        'annotations': low_annotations}],
+                label: 'Scully',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [true, true, true, true,]},
+                       {'title': 'Entropy',
+                        'annotations': [...low_annotations, ...high_annotations]}],
+                label: 'Both',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [true, false, true, false,]},
+                       {'title': 'Entropy',
+                        'annotations': []}],
+                label: 'Reset',
+                method: 'update'
+            },
+            
+        ],
+        direction: 'left',
+        pad: {'r': 10, 't': 10},
+        showactive: true,
+        type: 'buttons',
+        x: 0.1,
+        xanchor: 'left',
+        y: button_layer_2_height,
+        yanchor: 'top' 
+    },
+    
+]
+
+var layout = {
+    title: 'Entropy',
+    updatemenus: updatemenus,
+    showlegend: false
+}
+
+
+Plotly.plot("myDiv", data, layout, {showSendToCloud: true});
+
+});
+  </script>
+  
+<div id="myDiv2" style="width:100%;height:500;"></div>
+
+  <script>
+    <!-- JAVASCRIPT CODE GOES HERE -->
+    Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv', function(err, rows){
+function unpack(rows, key) {
+  return rows.map(function(row) { return row[key]; });
+}
+
+const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
+  
+<!-- Mulder: high, Scully: low. Reihen mit Floatwerten. Je ein Graph pro Maßeinheit-->
+var button_layer_2_height = 1.2
+var high = unpack(rows, 'AAPL.High').map(x => parseFloat(x))
+var low = unpack(rows, 'AAPL.Low').map(x => parseFloat(x))
+var date = unpack(rows, 'Date')
+
+
+var high_ave = arrAvg(high)
+var high_max = Math.max(...high)
+var low_ave = arrAvg(low)
+var low_min = Math.min(...low)
+
+var data = [{
+    x: date, 
+    y: high,
+    mode: 'lines',
+    name: 'Mulder',
+    marker: {color: '#33CFA5'}
+  },
+  {
+    x: date, 
+    y: date.map(a => high_ave),
+    mode: 'lines',
+    name: 'Scully Average',
+    line: {color: '#33CFA5', dash: 'dash'},
+    visible: false
+  },
+  {
+    x: date, 
+    y: low,
+    name: 'Scully',
+    mode: 'lines',
+    marker: {color: '#F06A6A'}
+  },
+  {
+    x: date, 
+    y: date.map(a => low_ave),
+    mode: 'lines',
+    name: 'Mulder Average',
+    visible: false,
+    line: {color: '#F06A6A', dash: 'dash'}
+  },
+  
+]
+
+var high_annotations = [
+    {
+      text: 'Mulder Average:<br>' + high_ave.toFixed(2), 
+      x: '2016-03-01', 
+      y: high_ave, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },
+    {
+      text: 'Mulder Max:<br>' + high_max.toFixed(2), 
+      x: date[high.indexOf(high_max)], 
+      y: high_max, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },  
+]
+
+var low_annotations = [{
+      text: 'Scully Average:<br>' + low_ave.toFixed(2), 
+      x: '2015-05-01', 
+      y: low_ave, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    },
+    {
+      text: 'Scully Min:<br>' + low_min.toFixed(2), 
+      x: date[low.indexOf(low_min)], 
+      y: low_min, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    }
+ ]
+
+var updatemenus=[
+    {
+        buttons: [   
+            {
+                args: [{'visible': [true, true, false, false]},
+                       {'title': 'Dementia Mulder',
+                        'annotations': high_annotations}],
+                label: 'Mulder',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [false, false, true, true,]},
+                       {'title': 'Dementia Scully',
+                        'annotations': low_annotations}],
+                label: 'Scully',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [true, true, true, true,]},
+                       {'title': 'Dementia',
+                        'annotations': [...low_annotations, ...high_annotations]}],
+                label: 'Both',
+                method: 'update'
+            },
+            {
+                args: [{'visible': [true, false, true, false,]},
+                       {'title': 'Dementia',
+                        'annotations': []}],
+                label: 'Reset',
+                method: 'update'
+            },
+            
+        ],
+        direction: 'left',
+        pad: {'r': 10, 't': 10},
+        showactive: true,
+        type: 'buttons',
+        x: 0.1,
+        xanchor: 'left',
+        y: button_layer_2_height,
+        yanchor: 'top' 
+    },
+    
+]
+
+var layout = {
+    title: 'Dementia',
+    updatemenus: updatemenus,
+    showlegend: false
+}
+
+
+Plotly.plot("myDiv2", data, layout, {showSendToCloud: true});
+
+});
+  </script>
+</body>
+
+
+

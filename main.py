@@ -17,5 +17,7 @@ def calculate(filename):
 	f.close
 
 # Berechnungen für die erste Folge, und die angegebenen Figuren	
-calculate(mkFile("urn:cts:xfiles:s1.1X01:1", "MULDER"))
-calculate(mkFile("urn:cts:xfiles:s1.1X01:1", "SCULLY"))
+#calculate(mkFile("urn:cts:xfiles:s1.1X01:1", "MULDER"))
+#calculate(mkFile("urn:cts:xfiles:s1.1X01:1", "SCULLY"))
+calculate(mkFile("urn:cts:xfiles:s6.6X14:1", "MULDER"))
+calculate(mkFile("urn:cts:xfiles:s6.6X14:1", "SCULLY"))
