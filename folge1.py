@@ -52,7 +52,7 @@ def getFolgenInhalt(startUrn, figure, figureText):
 #print(data_retrieval("urn:cts:xfiles:s1.1X01:23", " MULDER")) # MAN BEACHTE DAS LEERZEICHEN IM STRING
 #print(isValid("urn:cts:xfiles:s1.1X01:1"))
 #print(getNextUrn("urn:cts:xfiles:s1.1X01:1"))
-print(getFolgenInhalt("urn:cts:xfiles:s1.1X01:1", " MULDER", ""))
-print("\n\n")
-print(getFolgenInhalt("urn:cts:xfiles:s1.1X01:1", " SCULLY", ""))
+#print(getFolgenInhalt("urn:cts:xfiles:s1.1X01:1", " MULDER", ""))
+#print("\n\n")
+#print(getFolgenInhalt("urn:cts:xfiles:s1.1X01:1", " SCULLY", ""))
 

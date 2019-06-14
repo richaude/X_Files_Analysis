@@ -111,22 +111,23 @@ def token_type_stats(text): #dementia
     
 def makeEverythingRight(txt):
 	words = txt.split()
-	print("tokens, types, tokens/types: "+str(token_type_stats(words)))
+	answer = "tokens, types, tokens/types: "+str(token_type_stats(words))
 	# calculating entropy for each word - should we average it? Currently doing it
 	totalEntropy = 0
 	totalRedundance = 0
 	for word in words:
 		totalEntropy += entropy(word)
 		totalRedundance += (maxEntropy(word) - entropy(word))
-		print(word + ": "+ str(entropy(word)))
+		#print(word + ": "+ str(entropy(word)))
 	averageEntropy = totalEntropy/len(words)
 	averageRedundance = totalRedundance/len(words)
-	print("Durchschnittsentropie des Inputs: "+str(averageEntropy))
-	print("Durchschnittsredundanz: "+str(averageRedundance)) # ist that even right? They are almost the same
+	answer += "\nDurchschnittsentropie des Inputs: "+str(averageEntropy)
+	answer += "\nDurchschnittsredundanz: "+str(averageRedundance) # ist that even right? They are almost the same
+	return answer
 	
 			
 #for k,v in wahrscheinlichkeiten("hallo").items():
 	#print(k + ": " + str(v))
-print(str(entropy("abcdefghijklmnopqrstuvwxyz")))
+#print(str(entropy("abcdefghijklmnopqrstuvwxyz")))
 #print(token_type_stats("hallo du \n da da"))
-makeEverythingRight("Mulder and Scully make their way through the crowded bar. We see many people sitting at the bar, but one particular man seems to be watching Mulder and Scully. Scully is looking through a file, we see a photo of a man, the same man we saw trembling in his home at the start, in a military uniform")
+#print(makeEverythingRight("Mulder and Scully make their way through the crowded bar. We see many people sitting at the bar, but one particular man seems to be watching Mulder and Scully. Scully is looking through a file, we see a photo of a man, the same man we saw trembling in his home at the start, in a military uniform"))
