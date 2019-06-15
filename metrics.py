@@ -122,8 +122,8 @@ def makeEverythingRight(txt):
 		#print(word + ": "+ str(entropy(word)))
 	averageEntropy = totalEntropy/len(words)
 	averageRedundance = totalRedundance/len(words)
-	answer += ", "+str(averageEntropy)
-	answer += ", "+str(averageRedundance) # ist that even right? They are almost the same
+	answer += ","+str(averageEntropy)
+	answer += ","+str(averageRedundance) # ist that even right? They are almost the same
 	return answer
 	
 			

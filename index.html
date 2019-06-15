@@ -12,7 +12,7 @@
 
   <script>
     <!-- JAVASCRIPT CODE GOES HERE -->
-    Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv', function(err, rows){
+    Plotly.d3.csv('https://raw.githubusercontent.com/richaude/X_Files_Analysis/master/valuesEntropy.csv', function(err, rows){
 function unpack(rows, key) {
   return rows.map(function(row) { return row[key]; });
 }
@@ -21,9 +21,9 @@ const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
   
 <!-- Mulder: high, Scully: low. Reihen mit Floatwerten. Je ein Graph pro Maßeinheit. "Date" sind die Staffeln-->
 var button_layer_2_height = 1.2
-var high = unpack(rows, 'AAPL.High').map(x => parseFloat(x))
-var low = unpack(rows, 'AAPL.Low').map(x => parseFloat(x))
-var date = unpack(rows, 'Date')
+var high = unpack(rows, 'MULDER').map(x => parseFloat(x))
+var low = unpack(rows, 'SCULLY').map(x => parseFloat(x))
+var date = unpack(rows, 'Episode')
 
 <!-- Durchschnitt (wenn gewollt) anders berechnen???
 var high_ave = arrAvg(high)
