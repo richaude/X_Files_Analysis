@@ -78,6 +78,7 @@ def deutschProps():
 	return engProp
 	
 def entropy(word):
+	word = word.lower()
 	negEntropy = 0
 	#alleP = wahrscheinlichkeiten(word)
 	alleP = englishProperties()
@@ -89,6 +90,7 @@ def entropy(word):
 	return entropy
 	
 def maxEntropy(word):
+	word = word.lower()
 	negEntropy = 0
 	alleP = wahrscheinlichkeiten(word)
 	#alleP = englishProperties()
@@ -104,6 +106,7 @@ def token_type_stats(text): #dementia
     #tokens = text.split()
     for word in text:
         num_tokens += 1
+        word = word.lower()
         if not word in known_types:
             known_types.add(word)
             num_types += 1
@@ -125,6 +128,15 @@ def makeEverythingRight(txt):
 	answer += ","+str(averageEntropy)
 	answer += ","+str(averageRedundance) # ist that even right? They are almost the same
 	return answer
+	
+def averageEntropy(txt):
+	words = txt.split()
+	totalEntropy = 0
+	for word in words:
+		totalEntropy += entropy(word)
+	averageEntropy = totalEntropy/len(words)
+	return averageEntropy
+	
 	
 			
 #for k,v in wahrscheinlichkeiten("hallo").items():
