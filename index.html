@@ -28,8 +28,10 @@ var date = unpack(rows, 'Episode')
 <!-- Durchschnitt (wenn gewollt) anders berechnen???
 var high_ave = arrAvg(high)
 var high_max = Math.max(...high)
+var high_min = Math.min(...high)
 var low_ave = arrAvg(low)
 var low_min = Math.min(...low)
+var low_max = Math.max(...low)
 
 var data = [{
     x: date, 
@@ -42,7 +44,7 @@ var data = [{
     x: date, 
     y: date.map(a => high_ave),
     mode: 'lines',
-    name: 'Scully Average',
+    name: 'Mulder Average',
     line: {color: '#33CFA5', dash: 'dash'},
     visible: false
   },
@@ -57,7 +59,7 @@ var data = [{
     x: date, 
     y: date.map(a => low_ave),
     mode: 'lines',
-    name: 'Mulder Average',
+    name: 'Scully Average',
     visible: false,
     line: {color: '#F06A6A', dash: 'dash'}
   },
@@ -65,13 +67,13 @@ var data = [{
 ]
 
 var high_annotations = [
-    {
-      text: 'Mulder Average:<br>' + high_ave.toFixed(2), 
-      x: '2016-03-01', 
-      y: high_ave, 
-      yref: 'y', xref: 'x', 
-      ay: -40, ax: 0
-    },
+    <!--{
+      <!--text: 'Mulder Average:<br>' + high_ave.toFixed(2), 
+      <!--x: '2016-03-01', 
+      <!--y: high_ave, 
+      <!--yref: 'y', xref: 'x', 
+      <!--ay: -40, ax: 0
+    <!--},
     {
       text: 'Mulder Max:<br>' + high_max.toFixed(2), 
       x: date[high.indexOf(high_max)], 
@@ -79,22 +81,37 @@ var high_annotations = [
       yref: 'y', xref: 'x', 
       ay: -40, ax: 0
     },  
+    {
+      text: 'Mulder Min:<br>' + high_min.toFixed(2), 
+      x: date[high.indexOf(high_min)], 
+      y: high_min, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },  
 ]
 
-var low_annotations = [{
-      text: 'Scully Average:<br>' + low_ave.toFixed(2), 
-      x: '2015-05-01', 
-      y: low_ave, 
-      yref: 'y', xref: 'x', 
-      ay: 40, ax: 0
-    },
+var low_annotations = [<!--{
+      <!--text: 'Scully Average:<br>' + low_ave.toFixed(2), 
+      <!--x: '2015-05-01', 
+      <!--y: low_ave, 
+      <!--yref: 'y', xref: 'x', 
+      <!--ay: 40, ax: 0
+    <!--},
     {
       text: 'Scully Min:<br>' + low_min.toFixed(2), 
       x: date[low.indexOf(low_min)], 
       y: low_min, 
       yref: 'y', xref: 'x', 
       ay: 40, ax: 0
-    }
+    },
+    {
+      text: 'Scully Max:<br>' + low_max.toFixed(2), 
+      x: date[low.indexOf(low_max)], 
+      y: low_max, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    },
+    
  ]
 
 var updatemenus=[
@@ -176,6 +193,8 @@ var high_ave = arrAvg(high)
 var high_max = Math.max(...high)
 var low_ave = arrAvg(low)
 var low_min = Math.min(...low)
+var low_max = Math.max(...low)
+var high_min = Math.min(...high)
 
 var data = [{
     x: date, 
@@ -188,7 +207,7 @@ var data = [{
     x: date, 
     y: date.map(a => high_ave),
     mode: 'lines',
-    name: 'Scully Average',
+    name: 'Mulder Average',
     line: {color: '#33CFA5', dash: 'dash'},
     visible: false
   },
@@ -203,7 +222,7 @@ var data = [{
     x: date, 
     y: date.map(a => low_ave),
     mode: 'lines',
-    name: 'Mulder Average',
+    name: 'Scully Average',
     visible: false,
     line: {color: '#F06A6A', dash: 'dash'}
   },
@@ -224,13 +243,27 @@ var high_annotations = [
       y: high_max, 
       yref: 'y', xref: 'x', 
       ay: -40, ax: 0
-    },  
+    },
+    {
+      text: 'Mulder Min:<br>' + high_min.toFixed(2), 
+      x: date[high.indexOf(high_min)], 
+      y: high_min, 
+      yref: 'y', xref: 'x', 
+      ay: -40, ax: 0
+    },   
 ]
 
 var low_annotations = [{
       text: 'Scully Average:<br>' + low_ave.toFixed(2), 
       x: '2015-05-01', 
       y: low_ave, 
+      yref: 'y', xref: 'x', 
+      ay: 40, ax: 0
+    },
+    {
+      text: 'Scully Max:<br>' + low_max.toFixed(2), 
+      x: date[low.indexOf(low_max)], 
+      y: low_max, 
       yref: 'y', xref: 'x', 
       ay: 40, ax: 0
     },
