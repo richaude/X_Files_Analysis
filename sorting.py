@@ -107,12 +107,20 @@ def writeDementia():
 	f = open("valuesDementia.csv", "w")
 	start = "Episode,MULDER,SCULLY\n"
 	m = mulder()
+	mf = open("MulderS1", "w")
+	mf.write(" ".join(m))
+	mf.flush
+	mf.close
 	s = scully()
+	sf = open("ScullyS1", "w")
+	sf.write(" ".join(s))
+	sf.flush
+	sf.close
 	for i in range(1, 24):
-		start += str(i)+","+str(token_type_stats(m[i-1]))+","+str(token_type_stats(s[i-1]))+"\n"
+		start += "Episode_"+str(i)+","+str(token_type_stats(m[i-1]))+","+str(token_type_stats(s[i-1]))+"\n"
 	f.write(start)
 	f.flush
 	f.close
 	
-writeEntropy()
+#writeEntropy()
 writeDementia()

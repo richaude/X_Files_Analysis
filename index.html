@@ -281,28 +281,28 @@ var updatemenus=[
         buttons: [   
             {
                 args: [{'visible': [true, true, false, false]},
-                       {'title': 'Dementia Mulder',
+                       {'title': 'TTR Mulder',
                         'annotations': high_annotations}],
                 label: 'Mulder',
                 method: 'update'
             },
             {
                 args: [{'visible': [false, false, true, true,]},
-                       {'title': 'Dementia Scully',
+                       {'title': 'TTR Scully',
                         'annotations': low_annotations}],
                 label: 'Scully',
                 method: 'update'
             },
             {
                 args: [{'visible': [true, true, true, true,]},
-                       {'title': 'Dementia',
+                       {'title': 'Type/Token Ratio',
                         'annotations': [...low_annotations, ...high_annotations]}],
                 label: 'Both',
                 method: 'update'
             },
             {
                 args: [{'visible': [true, false, true, false,]},
-                       {'title': 'Dementia',
+                       {'title': 'Type/Token Ratio',
                         'annotations': []}],
                 label: 'Reset',
                 method: 'update'
@@ -322,7 +322,7 @@ var updatemenus=[
 ]
 
 var layout = {
-    title: 'Dementia',
+    title: 'Type/Token Ratio TTR',
     updatemenus: updatemenus,
     showlegend: false
 }

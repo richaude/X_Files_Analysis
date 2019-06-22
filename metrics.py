@@ -106,7 +106,7 @@ def token_type_stats(text): #dementia
     #tokens = text.split()
     for word in text:
         num_tokens += 1
-        word = word.lower()
+        #word = word.lower() so würde es noch kleiner werden
         if not word in known_types:
             known_types.add(word)
             num_types += 1
