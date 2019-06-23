@@ -117,10 +117,18 @@ def writeDementia():
 	sf.flush
 	sf.close
 	for i in range(1, 24):
-		start += "Episode_"+str(i)+","+str(token_type_stats(m[i-1]))+","+str(token_type_stats(s[i-1]))+"\n"
+		words = m[i-1].split()
+		start += "Episode_"+str(i)+","+str(token_type_stats(words))+","+str(token_type_stats(words))+"\n"
 	f.write(start)
 	f.flush
 	f.close
 	
 #writeEntropy()
 writeDementia()
+#f = open("MulderS1", "r")
+#m = f.read()
+#words = m.split()
+#for w in words:
+#	print(w)
+#print(m)
+#print(token_type_stats(words))
