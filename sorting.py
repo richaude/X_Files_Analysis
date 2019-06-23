@@ -117,8 +117,9 @@ def writeDementia():
 	sf.flush
 	sf.close
 	for i in range(1, 24):
-		words = m[i-1].split()
-		start += "Episode_"+str(i)+","+str(token_type_stats(words))+","+str(token_type_stats(words))+"\n"
+		wordsM = m[i-1].split()
+		wordsS = s[i-1].split()
+		start += "Episode_"+str(i)+","+str(token_type_stats(wordsM))+","+str(token_type_stats(wordsS))+"\n"
 	f.write(start)
 	f.flush
 	f.close
