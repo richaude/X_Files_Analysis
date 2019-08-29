@@ -102,18 +102,18 @@ def maxEntropy(word):
 	return entropy
 	
 def token_type_stats(text): #dementia
-    num_tokens, num_types, known_types = 0, 0, set()
-    #tokens = text.split()
-    for word in text:
-		
-        num_tokens += 1
-        #print(word)
-        #word = word.lower() so würde es noch kleiner werden
-        if not word in known_types:
-            known_types.add(word)
-            num_types += 1
+	num_tokens, num_types, known_types = 0, 0, set()
+	#tokens = text.split()
+	if len(text) > 0:
+		for word in text:
+			num_tokens += 1
+			#word = word.lower() so würde es noch kleiner werden
+			if not word in known_types:
+				known_types.add(word)
+				num_types += 1
     #return (num_tokens, num_types, num_tokens / num_types)
-    return num_types/num_tokens
+		return num_types/num_tokens
+	return 0
     
 def makeEverythingRight(txt):
 	words = txt.split()
@@ -133,10 +133,12 @@ def makeEverythingRight(txt):
 	
 def averageEntropy(txt):
 	words = txt.split()
-	totalEntropy = 0
-	for word in words:
-		totalEntropy += entropy(word)
-	averageEntropy = totalEntropy/len(words)
+	averageEntropy = 0
+	if len(words) > 0:
+		totalEntropy = 0
+		for word in words:
+			totalEntropy += entropy(word)
+		averageEntropy = totalEntropy/len(words)
 	return averageEntropy
 	
 	

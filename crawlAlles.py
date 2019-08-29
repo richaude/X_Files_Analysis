@@ -25,7 +25,7 @@ def mulder1():
 	                ,getFolgenInhalt("urn:cts:xfiles:s1.1X22:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s1.1X23:1", " MULDER", "")]
  f = open("mulder1", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
 	
@@ -54,7 +54,7 @@ def scully1():
 	                ,getFolgenInhalt("urn:cts:xfiles:s1.1X22:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s1.1X23:1", " SCULLY", "")]
  f = open("scully1", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
 # return "\n".join(contentScully)
@@ -86,7 +86,7 @@ def scully2():
 	                ,getFolgenInhalt("urn:cts:xfiles:s2.2X24:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s2.2X25:1", " SCULLY", "")]
  f = open("scully2", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
  #return "\n".join(contentScully)
@@ -118,7 +118,7 @@ def mulder2():
 	                ,getFolgenInhalt("urn:cts:xfiles:s2.2X24:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s2.2X25:1", " MULDER", "")]
  f = open("mulder2", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
  #return "\n".join(contentMulder)
@@ -149,7 +149,7 @@ def scully3():
 	                ,getFolgenInhalt("urn:cts:xfiles:s3.3X23:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s3.3X24:1", " SCULLY", "")]
  f = open("scully3", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
  #return "\n".join(contentScully)
@@ -180,7 +180,7 @@ def mulder3():
 	                ,getFolgenInhalt("urn:cts:xfiles:s3.3X23:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s3.3X24:1", " MULDER", "")]
  f = open("mulder3", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
  #return "\n".join(contentMulder)  
@@ -211,7 +211,7 @@ def scully4():
 	                ,getFolgenInhalt("urn:cts:xfiles:s4.4X23:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s4.4X24:1", " SCULLY", "")]
  f = open("scully4", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
  #return "\n".join(contentScully)
@@ -242,7 +242,7 @@ def mulder4():
 	                ,getFolgenInhalt("urn:cts:xfiles:s4.4X23:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s4.4X24:1", " MULDER", "")]
  f = open("mulder4", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
  #return "\n".join(contentMulder)  
@@ -269,7 +269,7 @@ def scully5():
 	                ,getFolgenInhalt("urn:cts:xfiles:s5.5X19:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s5.5X20:1", " SCULLY", "")]
  f = open("scully5", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
 # return "\n".join(contentScully)
@@ -296,7 +296,7 @@ def mulder5():
 	                ,getFolgenInhalt("urn:cts:xfiles:s5.5X19:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s5.5X20:1", " MULDER", "")]
  f = open("mulder5", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
  #return "\n".join(contentMulder)
@@ -325,7 +325,7 @@ def scully6():
 	                ,getFolgenInhalt("urn:cts:xfiles:s6.6X21:1", " SCULLY", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s6.6X22:1", " SCULLY", "")]
  f = open("scully6", "w")
- f.write("\n".join(contentScully))
+ f.write("SEPARATOR".join(contentScully))
  f.flush
  f.close
  #return "\n".join(contentScully)
@@ -354,7 +354,7 @@ def mulder6():
 	                ,getFolgenInhalt("urn:cts:xfiles:s6.6X21:1", " MULDER", "")
 	                ,getFolgenInhalt("urn:cts:xfiles:s6.6X22:1", " MULDER", "")]
  f = open("mulder6", "w")
- f.write("\n".join(contentMulder))
+ f.write("SEPARATOR".join(contentMulder))
  f.flush
  f.close
  #return "\n".join(contentMulder)

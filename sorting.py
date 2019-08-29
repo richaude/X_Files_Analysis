@@ -124,12 +124,52 @@ def writeDementia():
 	f.flush
 	f.close
 	
-#writeEntropy()
-writeDementia()
-#f = open("MulderS1", "r")
-#m = f.read()
-#words = m.split()
-#for w in words:
-#	print(w)
-#print(m)
-#print(token_type_stats(words))
+def writeEntropy2(staffeln):
+	f = open("valuesEntropy2.csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	#m = mulder()
+	#s = scully()
+	episodenzahlen = [24, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			for i in range(1, episodenzahlen[z]):
+				print(episodenzahlen[z])
+				m = open("mulder"+str(z+1), "r")
+				s = open("scully"+str(z+1), "r")
+				mulder = m.read()
+				mulderEpisodes = mulder.split("SEPARATOR")
+				print(str(len(mulderEpisodes)))
+				scully = s.read()
+				scullyEpisodes = scully.split("SEPARATOR")
+				print(str(len(scullyEpisodes)))
+				start += "S"+str(z+1)+"E"+str(i)+","+str(averageEntropy(mulderEpisodes[i-1]))+","+str(averageEntropy(scullyEpisodes[i-1]))+"\n"
+				m.close
+				s.close
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
+
+def writeDementia2(staffeln):
+	f = open("valuesDementia2.csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	episodenzahlen = [24, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			m = open("mulder"+str(z+1), "r")
+			wordsM = m.read()
+			wordsM_Episodes = wordsM.split("SEPARATOR")
+			s = open("scully"+str(z+1), "r")
+			wordsS = s.read()
+			wordsS_Episodes = wordsS.split("SEPARATOR")
+			for i in range(1, episodenzahlen[z]):
+				start += "S"+str(z+1)+"E"+str(i)+","+str(token_type_stats(wordsM_Episodes[i-1].split()))+","+str(token_type_stats(wordsS_Episodes[i-1].split()))+"\n"
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
+
+#writeEntropy2([0,1,2,3,4,5])	
+writeDementia2([0,1,2,3,4,5])
