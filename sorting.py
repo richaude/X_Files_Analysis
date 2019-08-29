@@ -1,5 +1,5 @@
 from folge1 import getFolgenInhalt, isValid
-from metrics import entropy, averageEntropy, token_type_stats
+from metrics import entropy, averageEntropy, token_type_stats, averageRedundance
 # für Staffel - Figurwerte
 # Episode, Figur, Demenz (types/tokens), Entropie, Redundanz
 
@@ -150,6 +150,33 @@ def writeEntropy2(staffeln):
 	f.write(start)
 	f.flush
 	f.close
+	
+def writeRedundance(staffeln):
+	f = open("valuesRedundance.csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	#m = mulder()
+	#s = scully()
+	episodenzahlen = [23, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			for i in range(0, episodenzahlen[z]):
+				#print(episodenzahlen[z])
+				m = open("mulder"+str(z+1), "r")
+				s = open("scully"+str(z+1), "r")
+				mulder = m.read()
+				mulderEpisodes = mulder.split("SEPARATOR")
+				#print(str(len(mulderEpisodes)))
+				scully = s.read()
+				scullyEpisodes = scully.split("SEPARATOR")
+				#print(str(len(scullyEpisodes)))
+				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageRedundance(mulderEpisodes[i]))+","+str(averageRedundance(scullyEpisodes[i]))+"\n"
+				m.close
+				s.close
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
 
 def writeDementia2(staffeln):
 	f = open("valuesDementia2.csv", "w")
@@ -173,5 +200,6 @@ def writeDementia2(staffeln):
 	f.flush
 	f.close
 
-writeEntropy2([0,1,2,3,4,5])	
+#writeEntropy2([0,1,2,3,4,5])	
 #writeDementia2([0,1,2,3,4,5])
+writeRedundance([0,1,2,3,4,5])

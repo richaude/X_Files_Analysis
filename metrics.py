@@ -113,23 +113,7 @@ def token_type_stats(text): #dementia
 				num_types += 1
     #return (num_tokens, num_types, num_tokens / num_types)
 		return num_types/num_tokens
-	return 0
-    
-def makeEverythingRight(txt):
-	words = txt.split()
-	answer = str(token_type_stats(words))
-	# calculating entropy for each word - should we average it? Currently doing it
-	totalEntropy = 0
-	totalRedundance = 0
-	for word in words:
-		totalEntropy += entropy(word)
-		totalRedundance += (maxEntropy(word) - entropy(word))
-		#print(word + ": "+ str(entropy(word)))
-	averageEntropy = totalEntropy/len(words)
-	averageRedundance = totalRedundance/len(words)
-	answer += ","+str(averageEntropy)
-	answer += ","+str(averageRedundance) # ist that even right? They are almost the same
-	return answer
+	return 0    
 	
 def averageEntropy(txt):
 	words = txt.split()
@@ -141,6 +125,15 @@ def averageEntropy(txt):
 		averageEntropy = totalEntropy/len(words)
 	return averageEntropy
 	
+def averageRedundance(txt):
+	words = txt.split()
+	averageRedundance = 0
+	if len(words) > 0:
+		totalRedundance = 0
+		for word in words:
+			totalRedundance += maxEntropy(word)
+		averageRedundance = totalRedundance/len(words)
+	return averageRedundance
 	
 			
 #for k,v in wahrscheinlichkeiten("hallo").items():
