@@ -359,7 +359,31 @@ def mulder6():
  f.close
  #return "\n".join(contentMulder)
 
-#print(mulder1())
+def machKlein(datei):
+	f = open(datei, "r")
+	txt = f.read()
+	f.flush
+	f.close
+	g = open("toLower_"+datei, "w")
+	g.write(txt.lower())
+	g.flush
+	g.close
+	
+machKlein("mulder1")
+machKlein("mulder2")
+machKlein("mulder3")
+machKlein("mulder4")
+machKlein("mulder5")
+machKlein("mulder6")
+machKlein("scully1")
+machKlein("scully2")
+machKlein("scully3")
+machKlein("scully4")
+machKlein("scully5")
+machKlein("scully6")
+
+	
+"""
 scully1()
 scully2()
 scully3()
@@ -373,3 +397,4 @@ mulder3()
 mulder4()
 mulder5()
 mulder6()
+"""

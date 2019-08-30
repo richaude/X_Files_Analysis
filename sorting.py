@@ -1,5 +1,5 @@
 from folge1 import getFolgenInhalt, isValid
-from metrics import entropy, averageEntropy, token_type_stats, averageRedundance, averageSentenceLength
+from metrics import entropy, averageEntropy, token_type_stats, averageRedundance, averageSentenceLength, averageWordlength, fillWords
 # für Staffel - Figurwerte
 # Episode, Figur, Demenz (types/tokens), Entropie, Redundanz
 
@@ -135,13 +135,13 @@ def writeEntropy2(staffeln, filename):
 		if z in staffeln:
 			for i in range(0, episodenzahlen[z]):
 				print(episodenzahlen[z])
-				m = open("mulder"+str(z+1), "r")
-				s = open("scully"+str(z+1), "r")
+				m = open("toLower_mulder"+str(z+1), "r")
+				s = open("toLower_scully"+str(z+1), "r")
 				mulder = m.read()
-				mulderEpisodes = mulder.split("SEPARATOR")
+				mulderEpisodes = mulder.split("separator")
 				print(str(len(mulderEpisodes)))
 				scully = s.read()
-				scullyEpisodes = scully.split("SEPARATOR")
+				scullyEpisodes = scully.split("separator")
 				print(str(len(scullyEpisodes)))
 				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageEntropy(mulderEpisodes[i]))+","+str(averageEntropy(scullyEpisodes[i]))+"\n"
 				m.close
@@ -162,13 +162,13 @@ def writeRedundance(staffeln, filename):
 		if z in staffeln:
 			for i in range(0, episodenzahlen[z]):
 				#print(episodenzahlen[z])
-				m = open("mulder"+str(z+1), "r")
-				s = open("scully"+str(z+1), "r")
+				m = open("toLower_mulder"+str(z+1), "r")
+				s = open("toLower_scully"+str(z+1), "r")
 				mulder = m.read()
-				mulderEpisodes = mulder.split("SEPARATOR")
+				mulderEpisodes = mulder.split("separator")
 				#print(str(len(mulderEpisodes)))
 				scully = s.read()
-				scullyEpisodes = scully.split("SEPARATOR")
+				scullyEpisodes = scully.split("separator")
 				#print(str(len(scullyEpisodes)))
 				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageRedundance(mulderEpisodes[i]))+","+str(averageRedundance(scullyEpisodes[i]))+"\n"
 				m.close
@@ -185,13 +185,13 @@ def writeDementia2(staffeln, filename):
 	z = 0
 	while z < 6:
 		if z in staffeln:
-			m = open("mulder"+str(z+1), "r")
+			m = open("toLower_mulder"+str(z+1), "r")
 			wordsM = m.read()
-			wordsM_Episodes = wordsM.split("SEPARATOR")
+			wordsM_Episodes = wordsM.split("separator")
 			print(str(len(wordsM_Episodes)))
-			s = open("scully"+str(z+1), "r")
+			s = open("toLower_scully"+str(z+1), "r")
 			wordsS = s.read()
-			wordsS_Episodes = wordsS.split("SEPARATOR")
+			wordsS_Episodes = wordsS.split("separator")
 			print(str(len(wordsS_Episodes)))
 			for i in range(0, episodenzahlen[z]):
 				start += "S"+str(z+1)+"E"+str(i+1)+","+str(token_type_stats(wordsM_Episodes[i].split()))+","+str(token_type_stats(wordsS_Episodes[i].split()))+"\n"
@@ -207,20 +207,64 @@ def writeSentences(staffeln, filename):
 	z = 0
 	while z < 6:
 		if z in staffeln:
-			m = open("mulder"+str(z+1), "r")
+			m = open("toLower_mulder"+str(z+1), "r")
 			txt = m.read()
-			m_Episodes = txt.split("SEPARATOR")
-			s = open("scully"+str(z+1), "r")
+			m_Episodes = txt.split("separator")
+			s = open("toLower_scully"+str(z+1), "r")
 			txtS = s.read()
-			s_Episodes = txtS.split("SEPARATOR")
+			s_Episodes = txtS.split("separator")
 			for i in range(0, episodenzahlen[z]):
 				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageSentenceLength(m_Episodes[i]))+","+str(averageSentenceLength(s_Episodes[i]))+"\n"
 		z += 1
 	f.write(start)
 	f.flush
 	f.close
+	
+def writeWordLengths(staffeln, filename):
+	f = open(filename+".csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	episodenzahlen = [23, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			m = open("toLower_mulder"+str(z+1), "r")
+			txt = m.read()
+			m_Episodes = txt.split("separator")
+			s = open("toLower_scully"+str(z+1), "r")
+			txtS = s.read()
+			s_Episodes = txtS.split("separator")
+			for i in range(0, episodenzahlen[z]):
+				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageWordlength(m_Episodes[i]))+","+str(averageWordlength(s_Episodes[i]))+"\n"
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
+	
+def writeFillwords(staffeln, filename):
+	f = open(filename+".csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	episodenzahlen = [23, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			m = open("toLower_mulder"+str(z+1), "r")
+			txt = m.read()
+			m_Episodes = txt.split("separator")
+			print(str(len(m_Episodes)))
+			s = open("toLower_scully"+str(z+1), "r")
+			txtS = s.read()
+			s_Episodes = txtS.split("separator")
+			print(str(len(s_Episodes)))
+			for i in range(0, episodenzahlen[z]):
+				start += "S"+str(z+1)+"E"+str(i+1)+","+str(fillWords(m_Episodes[i]))+","+str(fillWords(s_Episodes[i]))+"\n"
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
 
-#writeEntropy2([0,1,2,3,4,5])	
-#writeDementia2([0,1,2,3,4,5])
-#writeRedundance([0,1,2,3,4,5])
-writeSentences([0,1,2,3,4,5], "valuesSatzlaengen")
+writeEntropy2([0,1,2,3,4,5], "valuesEntropyLower")	
+writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
+writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
+writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
+writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
+writeFillwords([0,1,2,3,4,5], "valuesFillwordsLower")

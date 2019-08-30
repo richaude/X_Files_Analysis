@@ -1,5 +1,6 @@
 import math
 from nltk import tokenize
+from nltk.tokenize import RegexpTokenizer
 
 def wahrscheinlichkeiten(txt):
 	properties = {}
@@ -147,13 +148,30 @@ def averageSentenceLength(txt):
 	return averageSentenceLength
 	
 def averageWordlength(txt):
-	pass
+	tokenizer = RegexpTokenizer(r'\w+')
+	words = tokenizer.tokenize(txt)
+	averageWordlength = 0
+	#print(words)
+	if len(words) > 0:
+		totalWordLength = 0
+		for w in words:
+			totalWordLength += len(w)
+		averageWordlength = totalWordLength/len(words)
+	return averageWordlength
 	
 def fillWords(txt):
-	pass
+	fillwords = ["er", "uhm", "uh", "ahm", "hm", "ah", "um", "erm", "am", "huh"]
+	tokenizer = RegexpTokenizer(r'\w+')
+	words = tokenizer.tokenize(txt)
+	totalFillwords = 0
+	for w in words:
+		if w in fillwords:
+			totalFillwords += 1
+	return totalFillwords
 	
+#print(fillWords("Could, ah, you show me, uh, where the caretaker is, hm, working?"))
 #print(averageSentenceLength("Hey! Hal? Hdl."))
-			
+#print(averageWordlength("ha, ha, ha ha"))
 #for k,v in wahrscheinlichkeiten("hallo").items():
 	#print(k + ": " + str(v))
 #print(str(entropy("abcdefghijklmnopqrstuvwxyz")))
