@@ -262,9 +262,9 @@ def writeFillwords(staffeln, filename):
 	f.flush
 	f.close
 
-writeEntropy2([0,1,2,3,4,5], "valuesEntropyLower")	
-writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
-writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
-writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
-writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
+#writeEntropy2([0,1,2,3,4,5], "valuesEntropyLower")	
+#writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
+#writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
+#writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
+#writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
 writeFillwords([0,1,2,3,4,5], "valuesFillwordsLower")

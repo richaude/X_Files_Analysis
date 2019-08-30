@@ -160,7 +160,7 @@ def averageWordlength(txt):
 	return averageWordlength
 	
 def fillWords(txt):
-	fillwords = ["er", "uhm", "uh", "ahm", "hm", "ah", "um", "erm", "am", "huh"]
+	fillwords = ["er", "uhm", "uh", "ahm", "hm", "ah", "um", "erm", "am", "huh", "oh"]
 	tokenizer = RegexpTokenizer(r'\w+')
 	words = tokenizer.tokenize(txt)
 	totalFillwords = 0
