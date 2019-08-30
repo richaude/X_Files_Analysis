@@ -1,5 +1,5 @@
 from folge1 import getFolgenInhalt, isValid
-from metrics import entropy, averageEntropy, token_type_stats, averageRedundance
+from metrics import entropy, averageEntropy, token_type_stats, averageRedundance, averageSentenceLength
 # für Staffel - Figurwerte
 # Episode, Figur, Demenz (types/tokens), Entropie, Redundanz
 
@@ -124,8 +124,8 @@ def writeDementia():
 	f.flush
 	f.close
 	
-def writeEntropy2(staffeln):
-	f = open("valuesEntropy2.csv", "w")
+def writeEntropy2(staffeln, filename):
+	f = open(filename+".csv", "w")
 	start = "Episode,MULDER,SCULLY\n"
 	#m = mulder()
 	#s = scully()
@@ -151,8 +151,8 @@ def writeEntropy2(staffeln):
 	f.flush
 	f.close
 	
-def writeRedundance(staffeln):
-	f = open("valuesRedundance.csv", "w")
+def writeRedundance(staffeln, filename):
+	f = open(filename+".csv", "w")
 	start = "Episode,MULDER,SCULLY\n"
 	#m = mulder()
 	#s = scully()
@@ -178,8 +178,8 @@ def writeRedundance(staffeln):
 	f.flush
 	f.close
 
-def writeDementia2(staffeln):
-	f = open("valuesDementia2.csv", "w")
+def writeDementia2(staffeln, filename):
+	f = open(filename+".csv", "w")
 	start = "Episode,MULDER,SCULLY\n"
 	episodenzahlen = [23, 25, 24, 24, 20, 22]
 	z = 0
@@ -199,7 +199,28 @@ def writeDementia2(staffeln):
 	f.write(start)
 	f.flush
 	f.close
+	
+def writeSentences(staffeln, filename):
+	f = open(filename+".csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	episodenzahlen = [23, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			m = open("mulder"+str(z+1), "r")
+			txt = m.read()
+			m_Episodes = txt.split("SEPARATOR")
+			s = open("scully"+str(z+1), "r")
+			txtS = s.read()
+			s_Episodes = txtS.split("SEPARATOR")
+			for i in range(0, episodenzahlen[z]):
+				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageSentenceLength(m_Episodes[i]))+","+str(averageSentenceLength(s_Episodes[i]))+"\n"
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
 
 #writeEntropy2([0,1,2,3,4,5])	
 #writeDementia2([0,1,2,3,4,5])
-writeRedundance([0,1,2,3,4,5])
+#writeRedundance([0,1,2,3,4,5])
+writeSentences([0,1,2,3,4,5], "valuesSatzlaengen")

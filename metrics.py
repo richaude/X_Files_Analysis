@@ -1,4 +1,5 @@
 import math
+from nltk import tokenize
 
 def wahrscheinlichkeiten(txt):
 	properties = {}
@@ -135,6 +136,23 @@ def averageRedundance(txt):
 		averageRedundance = totalRedundance/len(words)
 	return averageRedundance
 	
+def averageSentenceLength(txt):
+	sentences = tokenize.sent_tokenize(txt)
+	averageSentenceLength = 0
+	if len(sentences) > 0:
+		totalSentencesLength = 0
+		for s in sentences:
+			totalSentencesLength += len(s)
+		averageSentenceLength = totalSentencesLength/len(sentences) # hier eventuell noch -1, weil Satzende wird immer mitgezählt
+	return averageSentenceLength
+	
+def averageWordlength(txt):
+	pass
+	
+def fillWords(txt):
+	pass
+	
+#print(averageSentenceLength("Hey! Hal? Hdl."))
 			
 #for k,v in wahrscheinlichkeiten("hallo").items():
 	#print(k + ": " + str(v))
