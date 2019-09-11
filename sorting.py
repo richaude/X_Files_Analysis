@@ -143,9 +143,13 @@ def writeEntropy2(staffeln, filename):
 				scully = s.read()
 				scullyEpisodes = scully.split("separator")
 				print(str(len(scullyEpisodes)))
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageEntropy(mulderEpisodes[i]))+","+str(averageEntropy(scullyEpisodes[i]))+"\n"
-				m.close
-				s.close
+				if ((averageEntropy(mulderEpisodes[i]) != 0) and (averageEntropy(scullyEpisodes[i]) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageEntropy(mulderEpisodes[i]))+","+str(averageEntropy(scullyEpisodes[i]))+"\n"
+					
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
@@ -170,9 +174,12 @@ def writeRedundance(staffeln, filename):
 				scully = s.read()
 				scullyEpisodes = scully.split("separator")
 				#print(str(len(scullyEpisodes)))
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageRedundance(mulderEpisodes[i]))+","+str(averageRedundance(scullyEpisodes[i]))+"\n"
-				m.close
-				s.close
+				if ((averageRedundance(mulderEpisodes[i]) != 0) and (averageRedundance(scullyEpisodes[i]) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageRedundance(mulderEpisodes[i]))+","+str(averageRedundance(scullyEpisodes[i]))+"\n"
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
@@ -194,7 +201,12 @@ def writeDementia2(staffeln, filename):
 			wordsS_Episodes = wordsS.split("separator")
 			print(str(len(wordsS_Episodes)))
 			for i in range(0, episodenzahlen[z]):
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(token_type_stats(wordsM_Episodes[i].split()))+","+str(token_type_stats(wordsS_Episodes[i].split()))+"\n"
+				if ((token_type_stats(wordsM_Episodes[i].split()) != 0) and (token_type_stats(wordsS_Episodes[i].split()) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(token_type_stats(wordsM_Episodes[i].split()))+","+str(token_type_stats(wordsS_Episodes[i].split()))+"\n"
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
@@ -214,7 +226,12 @@ def writeSentences(staffeln, filename):
 			txtS = s.read()
 			s_Episodes = txtS.split("separator")
 			for i in range(0, episodenzahlen[z]):
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageSentenceLength(m_Episodes[i]))+","+str(averageSentenceLength(s_Episodes[i]))+"\n"
+				if ((averageSentenceLength(m_Episodes[i]) != 0) and (averageSentenceLength(s_Episodes[i]) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageSentenceLength(m_Episodes[i]))+","+str(averageSentenceLength(s_Episodes[i]))+"\n"
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
@@ -234,13 +251,20 @@ def writeWordLengths(staffeln, filename):
 			txtS = s.read()
 			s_Episodes = txtS.split("separator")
 			for i in range(0, episodenzahlen[z]):
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageWordlength(m_Episodes[i]))+","+str(averageWordlength(s_Episodes[i]))+"\n"
+				if ((averageWordlength(m_Episodes[i]) != 0) and (averageWordlength(s_Episodes[i]) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(averageWordlength(m_Episodes[i]))+","+str(averageWordlength(s_Episodes[i]))+"\n"
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
 	f.close
 	
 def writeFillwords(staffeln, filename):
+	# leave out 6-19, 2-7, 4-21, 5-1, 5-15, 2-20, 4-7, 5-20
+	missOut = ["S6E19", "S2E7", "S4E21", "S5E1", "S5E15", "S2E20", "S4E7", "S5E20"]
 	f = open(filename+".csv", "w")
 	start = "Episode,MULDER,SCULLY\n"
 	episodenzahlen = [23, 25, 24, 24, 20, 22]
@@ -256,15 +280,20 @@ def writeFillwords(staffeln, filename):
 			s_Episodes = txtS.split("separator")
 			print(str(len(s_Episodes)))
 			for i in range(0, episodenzahlen[z]):
-				start += "S"+str(z+1)+"E"+str(i+1)+","+str(fillWords(m_Episodes[i]))+","+str(fillWords(s_Episodes[i]))+"\n"
+				if ("S"+str(z+1)+"E"+str(i+1) not in missOut):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(fillWords(m_Episodes[i]))+","+str(fillWords(s_Episodes[i]))+"\n"
+				else:
+					pass
+			m.close
+			s.close
 		z += 1
 	f.write(start)
 	f.flush
 	f.close
 
 #writeEntropy2([0,1,2,3,4,5], "valuesEntropyLower")	
-#writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
-#writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
-#writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
-#writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
+writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
+writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
+writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
+writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
 writeFillwords([0,1,2,3,4,5], "valuesFillwordsLower")
