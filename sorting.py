@@ -1,5 +1,5 @@
 from folge1 import getFolgenInhalt, isValid
-from metrics import entropy, averageEntropy, token_type_stats, averageRedundance, averageSentenceLength, averageWordlength, fillWords
+from metrics import entropy, averageEntropy, token_type_stats, averageRedundance, averageSentenceLength, averageWordlength, fillWords, tokens
 # für Staffel - Figurwerte
 # Episode, Figur, Demenz (types/tokens), Entropie, Redundanz
 
@@ -290,10 +290,38 @@ def writeFillwords(staffeln, filename):
 	f.write(start)
 	f.flush
 	f.close
+	
+def writeTokens(staffeln, filename):
+	f = open(filename+".csv", "w")
+	start = "Episode,MULDER,SCULLY\n"
+	episodenzahlen = [23, 25, 24, 24, 20, 22]
+	z = 0
+	while z < 6:
+		if z in staffeln:
+			m = open("toLower_mulder"+str(z+1), "r")
+			wordsM = m.read()
+			wordsM_Episodes = wordsM.split("separator")
+			print(str(len(wordsM_Episodes)))
+			s = open("toLower_scully"+str(z+1), "r")
+			wordsS = s.read()
+			wordsS_Episodes = wordsS.split("separator")
+			print(str(len(wordsS_Episodes)))
+			for i in range(0, episodenzahlen[z]):
+				if ((token_type_stats(wordsM_Episodes[i].split()) != 0) and (token_type_stats(wordsS_Episodes[i].split()) != 0)):
+					start += "S"+str(z+1)+"E"+str(i+1)+","+str(tokens(wordsM_Episodes[i].split()))+","+str(tokens(wordsS_Episodes[i].split()))+"\n"
+				else:
+					pass
+			m.close
+			s.close
+		z += 1
+	f.write(start)
+	f.flush
+	f.close
 
 #writeEntropy2([0,1,2,3,4,5], "valuesEntropyLower")	
 #writeDementia2([0,1,2,3,4,5], "valuesDementiaLower")
-writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
+#writeRedundance([0,1,2,3,4,5], "valuesRedundanceLower")
 #writeSentences([0,1,2,3,4,5], "valuesSatzlaengenLower")
 #writeWordLengths([0,1,2,3,4,5], "valuesWortlaengenLower")
 #writeFillwords([0,1,2,3,4,5], "valuesFillwordsLower")
+writeTokens([0,1,2,3,4,5], "valuesTokens")

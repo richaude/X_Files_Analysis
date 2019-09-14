@@ -117,7 +117,21 @@ def token_type_stats(text): #dementia
 				num_types += 1
     #return (num_tokens, num_types, num_tokens / num_types)
 		return num_types/num_tokens
-	return 0    
+	return 0
+	
+def tokens(text):
+	num_tokens, num_types, known_types = 0, 0, set()
+	#tokens = text.split()
+	if len(text) > 0:
+		for word in text:
+			num_tokens += 1
+			#word = word.lower() so würde es noch kleiner werden
+			if not word in known_types:
+				known_types.add(word)
+				num_types += 1
+    #return (num_tokens, num_types, num_tokens / num_types)
+		return num_tokens
+	return 0      
 	
 def averageEntropy(txt):
 	words = txt.split()
