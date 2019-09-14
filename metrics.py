@@ -93,14 +93,16 @@ def entropy(word):
 	
 def maxEntropy(word):
 	word = word.lower()
-	negEntropy = 0
+	#negEntropy = 0
 	alleP = wahrscheinlichkeiten(word)
+	"""
 	#alleP = englishProperties()
 	for s in word:
 		if s in alleP:
 		    val = alleP[s]
 		    negEntropy += val * math.log(val, 2)
-	entropy = 0 - negEntropy
+	entropy = 0 - negEntropy"""
+	entropy = math.log(len(alleP), 2)
 	return entropy
 	
 def token_type_stats(text): #dementia
@@ -130,10 +132,14 @@ def averageEntropy(txt):
 def averageRedundance(txt):
 	words = txt.split()
 	averageRedundance = 0
+	undefined = 0
 	if len(words) > 0:
 		totalRedundance = 0
 		for word in words:
-			totalRedundance += maxEntropy(word)
+			#if maxEntropy(word) != 0:
+			totalRedundance += maxEntropy(word) - entropy(word)
+			#else:
+			#undefined += 1
 		averageRedundance = totalRedundance/len(words)
 	return averageRedundance
 	
